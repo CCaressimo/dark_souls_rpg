@@ -1,6 +1,6 @@
 """Character information"""
 
-from professions import SELECT_PROFESSION
+from .professions import SELECT_PROFESSION
 
 def name_and_profession_selection():
     """Select player name and profession"""

@@ -1,0 +1,92 @@
+TODO:
+- [Incorporate estus flasks for healing] 
+- [Set up souls drop from enemies to use to level up] 
+- [Set up tier based enemies and bosses]
+- [invader list]
+- [dying brings you back to the last bonfire with full health and reduced souls]
+- [enhance combat - being turnbased - stamina, mana, special attacks] 
+- [health and damage scales]
+- [Set up resistances and weaknesses status effects]
+- [Progress system, kill all bosses for the tier to Progress]
+- [Set up save and load system]
+- [write up scenarios]
+- [flavor text for encounters]
+- [rebalance all enemies and bosses based on tier]
+- [rebalance leveling system]
+- [Set up multiple attack types and spells for both player and enemies] 
+- [develop inventory system] 
+- [random npc scenarios with potential to give items]
+- [random chance for traders and blacksmith to appear]
+- [drop chance for enemies] 
+- [set up upgrade system for weapons and armor]
+
+
+game_root/
+│
+├── src/
+│   ├── __init__.py
+│   │
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── game.py          # Main game loop and initialization
+│   │   └── save_manager.py  # Handling save/load functionality
+│   │
+│   ├── character/
+│   │   ├── __init__.py
+│   │   ├── character.py     # Character base class and functions
+│   │   ├── professions.py   # Profession definitions
+│   │   ├── stats.py         # Stats management
+│   │   └── skills.py        # Skills and abilities
+│   │
+│   ├── combat/
+│   │   ├── __init__.py
+│   │   ├── actions.py       # Combat actions
+│   │   └── mechanics.py     # Combat rules and calculations
+│   │
+│   ├── entities/
+│   │   ├── __init__.py
+│   │   ├── monsters.py      # Regular monster definitions
+│   │   ├── bosses.py        # Boss definitions
+│   │   └── npcs.py          # Non-player characters
+│   │
+│   ├── items/
+│   │   ├── __init__.py
+│   │   ├── weapons.py       # Weapon definitions
+│   │   ├── armor.py         # Armor definitions
+│   │   ├── consumables.py   # Potions, food, etc.
+│   │   └── inventory.py     # Inventory management
+│   │
+│   ├── world/
+│   │   ├── __init__.py
+│   │   ├── locations.py     # Game locations/areas
+│   │   ├── scenarios.py     # Game scenarios/events
+│   │   └── quests.py        # Quest system
+│   │
+│   └── utils/
+│       ├── __init__.py
+│       ├── constants.py     # Game constants
+│       ├── helpers.py       # Helper functions
+│       └── config.py        # Configuration settings
+│
+├── data/
+│   ├── saves/              # Save files directory
+│   │   └── save_001.json
+│   │
+│   └── assets/            # Game assets (if any)
+│       ├── text/
+│       └── ascii_art/
+│
+├── tests/                 # Unit tests
+│   ├── __init__.py
+│   ├── test_character.py
+│   ├── test_combat.py
+│   └── test_items.py
+│
+├── docs/                  # Documentation
+│   ├── README.md
+│   └── CHANGELOG.md
+│
+├── requirements.txt       # Project dependencies
+├── setup.py              # Package setup file
+├── .gitignore
+└── README.md

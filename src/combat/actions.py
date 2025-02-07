@@ -1,9 +1,9 @@
 """Actions for the game"""
 
 import random
-from monsters import MONSTER_LIST
-from bosses import BOSS_LIST
-from character import get_player_stats, get_strongest_skill, character_info
+from ..entities.monsters import MONSTER_LIST
+from ..entities.bosses import BOSS_LIST
+from ..character.character import get_player_stats, get_strongest_skill, character_info
 
 def random_combat(player_name, player_stats, temp_stats):
     """Random combat encounter with a monster"""
