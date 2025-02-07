@@ -1,199 +1,238 @@
 """Monsters for the game"""
 
 MONSTER_LIST = [
-    {"name": "Hollow Soldier",
+    {
+        "name": "Hollow Soldier",
         "health": 2,
         "attack": 3,
         "damage": 1
     },
-    {"name": "Undead Dog",
+    {
+        "name": "Undead Dog",
         "health": 1,
         "attack": 6,
         "damage": 1
     },
-    {"name": "Asylum Demon",
+    {
+        "name": "Asylum Demon",
         "health": 4,
         "attack": 15,
         "damage": 2
     },
-    {"name": "Silver Knight",
+    {
+        "name": "Silver Knight",
         "health": 3,
         "attack": 4,
         "damage": 2
     },
-    {"name": "Giant",
+    {
+        "name": "Giant",
         "health": 4,
         "attack": 8,
         "damage": 1
     },
-    {"name": "Crystal Lizard",
+    {
+        "name": "Crystal Lizard",
         "health": 1,
         "attack": 5,
         "damage": 1
     },
-    {"name": "Darkwraith",
+    {
+        "name": "Darkwraith",
         "health": 4,
         "attack": 7,
         "damage": 2
     },
-    {"name": "Gravelord Servant",
+    {
+        "name": "Gravelord Servant",
         "health": 3,
         "attack": 4,
         "damage": 1
     },
-    {"name": "Hollow Archer",
+    {
+        "name": "Hollow Archer",
         "health": 1,
         "attack": 10,
         "damage": 1
     },
-    {"name": "Fallen Knight",
+    {
+        "name": "Fallen Knight",
         "health": 2,
         "attack": 8,
         "damage": 1
     },
-    {"name": "Cursed Hollow",
+    {
+        "name": "Cursed Hollow",
         "health": 1,
         "attack": 6,
         "damage": 1
     },
-    {"name": "Chained Prisoner",
+    {
+        "name": "Chained Prisoner",
         "health": 2,
         "attack": 5,
         "damage": 1
     },
-    {"name": "Gargoyle",
+    {
+        "name": "Gargoyle",
         "health": 3,
         "attack": 12,
         "damage": 2
     },
-    {"name": "Basilisk",
+    {
+        "name": "Basilisk",
         "health": 3,
         "attack": 7,
         "damage": 1
     },
-    {"name": "Black Knight",
+    {
+        "name": "Black Knight",
         "health": 6,
         "attack": 14,
         "damage": 3
     },
-    {"name": "Vagrant",
+    {
+        "name": "Vagrant",
         "health": 3,
         "attack": 13,
         "damage": 2
     },
-    {"name": "Witch",
+    {
+        "name": "Witch",
         "health": 1,
         "attack": 8,
         "damage": 2
     },
-    {"name": "Hollow Mage",
+    {
+        "name": "Hollow Mage",
         "health": 1,
         "attack": 6,
         "damage": 1
     },
-    {"name": "Infant Wyrm",
+    {
+        "name": "Infant Wyrm",
         "health": 3,
         "attack": 7,
         "damage": 2
     },
-    {"name": "Plague Rat",
+    {
+        "name": "Plague Rat",
         "health": 1,
         "attack": 4,
         "damage": 2
     },
-    {"name": "Gravelord",
+    {
+        "name": "Gravelord",
         "health": 5,
         "attack": 10,
         "damage": 2
     },
-    {"name": "Troll",
+    {
+        "name": "Troll",
         "health": 3,
         "attack": 9,
         "damage": 2
     },
-    {"name": "Giant Spider",
+    {
+        "name": "Giant Spider",
         "health": 3,
         "attack": 5,
         "damage": 1
     },
-    {"name": "Dreg",
+    {
+        "name": "Dreg",
         "health": 1,
         "attack": 2,
         "damage": 1
     },
-    {"name": "Skeleton",
+    {
+        "name": "Skeleton",
         "health": 1,
         "attack": 4,
         "damage": 1
     },
-    {"name": "Witch's Servant",
+    {
+        "name": "Witch's Servant",
         "health": 3,
         "attack": 6,
         "damage": 1
     },
-    {"name": "Mimic",
+    {
+        "name": "Mimic",
         "health": 2,
         "attack": 18,
         "damage": 5
     },
-    {"name": "Abyssal Walker",
+    {
+        "name": "Abyssal Walker",
         "health": 4,
         "attack": 12,
         "damage": 2
     },
-    {"name": "Bloathead",
+    {
+        "name": "Bloathead",
         "health": 1,
         "attack": 7,
         "damage": 1
     },
-    {"name": "Moss Giant",
+    {
+        "name": "Moss Giant",
         "health": 5,
         "attack": 12,
         "damage": 2
     },
-    {"name": "Dark Spirit",
+    {
+        "name": "Dark Spirit",
         "health": 3,
         "attack": 16,
         "damage": 4
     },
-    {"name": "Hallowed",
+    {
+        "name": "Hallowed",
         "health": 3,
         "attack": 7,
         "damage": 1
     },
-    {"name": "Giant Rat",
+    {
+        "name": "Giant Rat",
         "health": 1,
         "attack": 6,
         "damage": 2
     },
-    {"name": "Revenant",
+    {
+        "name": "Revenant",
         "health": 3,
         "attack": 10,
         "damage": 1
     },
-    {"name": "Ghoul",
+    {
+        "name": "Ghoul",
         "health": 2,
         "attack": 5,
         "damage": 1
     },
-    {"name": "Hellkite Dragon",
+    {
+        "name": "Hellkite Dragon",
         "health": 8,
         "attack": 14,
         "damage": 4
     },
-    {"name": "Lesser Demon",
+    {
+        "name": "Lesser Demon",
         "health": 5,
         "attack": 14,
         "damage": 2
     },
-    {"name": "Skeletal Mage",
+    {
+        "name": "Skeletal Mage",
         "health": 1,
         "attack": 6,
         "damage": 3
     },
-    {"name": "Bonewraith",
+    {
+        "name": "Bonewraith",
         "health": 3,
         "attack": 7,
         "damage": 1
-}
+    }
 ]

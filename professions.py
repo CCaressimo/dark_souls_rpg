@@ -1,7 +1,7 @@
 """Professions for the game"""
 
 SELECT_PROFESSION = {
-    "1": {
+    "1":{
         "name": "knight",
         "health": 8,
         "strength": 14,
@@ -9,7 +9,7 @@ SELECT_PROFESSION = {
         "intelligence": 4,
         "faith": 4
     },
-    "2":  {
+    "2":{
         "name": "warrior",
         "health": 6,
         "strength": 20,
@@ -17,7 +17,7 @@ SELECT_PROFESSION = {
         "intelligence": 3,
         "faith": 3
     },
-    "3":  {
+    "3":{
         "name": "paladin",
         "health": 9,
         "strength": 14,

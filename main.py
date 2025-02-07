@@ -1,7 +1,7 @@
 """
 Old school rpg with conditionals.
 """
-from professions import SELECT_PROFESSION
+
 from character import name_and_profession_selection, get_player_stats
 from actions import random_combat, rest_at_bonfire
 
