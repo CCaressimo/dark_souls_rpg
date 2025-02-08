@@ -162,7 +162,7 @@ def rest_at_bonfire(player_name, player_stats, temp_stats):
         elif response == "l":
             level_up( player_stats)
         elif response == "s":
-            character_info(player_name, player_stats, temp_stats)
+            character_info(player_name, player_stats)
         elif response == "i":
             print(f"{player_name} updated their inventory")
         elif response == "q":

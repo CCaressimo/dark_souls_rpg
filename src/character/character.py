@@ -1,7 +1,6 @@
 """Character information"""
 
 from .professions import SELECT_PROFESSION
-from .equipment import Equipment
 
 def name_and_profession_selection():
     """Select player name and profession"""
@@ -20,7 +19,7 @@ def name_and_profession_selection():
         print(", ".join(SELECT_PROFESSION.keys()))
 
 
-def character_info(player_name, player_stats, temp_stats):
+def character_info(player_name, player_stats):
     """Display player information"""
     skills = get_player_stats(player_stats)
     equipment = player_stats['equipment']
