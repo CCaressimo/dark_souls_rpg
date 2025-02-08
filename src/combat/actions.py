@@ -3,7 +3,7 @@
 import random
 from ..entities.monsters import MONSTER_LIST
 from ..entities.bosses import BOSS_LIST
-from ..character.character import get_player_stats, get_strongest_skill, character_info
+from ..character.character import get_player_stats, get_strongest_skill, character_info, player_status
 
 def random_combat(player_name, player_stats, temp_stats):
     """Random combat encounter with a monster"""
@@ -11,10 +11,10 @@ def random_combat(player_name, player_stats, temp_stats):
     encounter_chance = random.randint(1, 15)
     if encounter_chance == 1:
         enemy = random.choice(BOSS_LIST)
-        print(f"You just walked into {enemy['name']}'s lair!")
+        print(f"You just walked into {enemy['name']}'s lair!\n")
     else:
         enemy = random.choice(MONSTER_LIST)
-        print(f"You have encountered a {enemy['name']}!")
+        print(f"You have encountered a {enemy['name']}!\n")
 
     skills = get_player_stats(player_stats)
 
@@ -22,13 +22,15 @@ def random_combat(player_name, player_stats, temp_stats):
         # Check enemy death
         if int(enemy['health']) <= 0:
             print(f"You defeated the {enemy['name']}!")
+            print(f"{player_name} gained {enemy['souls']} souls!\n")
+            player_stats['souls'] += enemy['souls']
             break
         # Check player death
         if int(temp_stats['health']) <= 0:
-            print(f"{player_name} has died!")
+            print(f"{player_name} has died!\n")
             break
 
-        character_info(player_name, player_stats, temp_stats)
+        player_status(player_stats, temp_stats)
         action = input("What do you want to do?\n(a) Attack\n(h) Heal\n(r) Run\n")
         player_roll = random.randint(1, 20)
         enemy_roll = random.randint(1, 20)
@@ -78,7 +80,7 @@ def random_combat(player_name, player_stats, temp_stats):
             elif player_attack < enemy_attack:
                 print(f"Ouch you took damage from a {enemy['name']}!\n")
                 temp_stats['health'] -= enemy['damage']
-                print(f"{player_name} has {player_stats['health']} health left!\n")
+                print(f"{player_name} has {temp_stats['health']} health left!\n")
 
                 print(f"{enemy['name']} has {enemy['health']} health left!\n")
             else:
@@ -122,8 +124,6 @@ def random_combat(player_name, player_stats, temp_stats):
                 else:
                     print(f"{player_name} failed to run away but dodged the attack!\n")
 
-        else:
-            print(f"{player_name} killed the {enemy['name']}!\n")
 
 
 
@@ -142,35 +142,82 @@ def heal(player_name, player_stats, temp_stats):
 
 def rest_at_bonfire(player_name, player_stats, temp_stats):
     """Player can rest to gain health and flasks back"""
-    character_info(player_name, player_stats, temp_stats)
-    response = input(f"{player_name} came across a bonfire,\nrest and have a Siegbräu? (y/n)\n")
-    if response == "y":
-        # Level up section
-        level_up = input(f"{player_name} leveled up! Choose a stat to increase:\n(h) Health\n(s) Strength\n(d) Dexterity\n(i) Intelligence\n(f) Faith\n")
-        while True:
-            if level_up == "h":
-                player_stats['health'] += 1
-                break
-            elif level_up == "s":
-                player_stats['strength'] += 1
-                break
-            elif level_up == "d":
-                player_stats['dexterity'] += 1
-                break
-            elif level_up == "i":
-                player_stats['intelligence'] += 1
-                break
-            elif level_up == "f":
-                player_stats['faith'] += 1
-                break
-            else:
-                print("Invalid stat")
-                level_up = input(f"{player_name} leveled up! Choose a stat to increase:\n(h) Health\n(s) Strength\n(d) Dexterity\n(i) Intelligence\n(f) Faith\n")
 
-        # Update temp_stats and heal the player
-        get_player_stats(player_stats)
-        temp_stats['health'] = player_stats['health']  # Restore health to full
-        print(f"{player_name} has been healed!")
-        character_info(player_name, player_stats, temp_stats)
+    player_status(player_stats, temp_stats)
+
+    print(f"{player_name} came across a bonfire,\n")
+    while True:
+        response = input("(r)Rest and have a Siegbräu?\n"
+                         "(s)Check your stats?\n"
+                         "(l)Level up?\n"
+                         "(i)Update inventory?\n"
+                         "(q)Head back out into the world\n")
+        if response == "r":
+            # Update temp_stats and heal the player
+            get_player_stats(player_stats)
+            temp_stats['health'] = player_stats['health']  # Restore health to full
+            temp_stats['attunement'] = player_stats['attunement']  # Restore attunement to full
+            temp_stats['estus'] = player_stats['estus']  # Restore estus to full
+            print(f"{player_name} has been replenished HP, MP and Estus Flasks!")
+        elif response == "l":
+            level_up( player_stats)
+        elif response == "s":
+            character_info(player_name, player_stats, temp_stats)
+        elif response == "i":
+            print(f"{player_name} updated their inventory")
+        elif response == "q":
+            print(f"{player_name} left the bonfire")
+            break
+    
+
+def level_up(player_stats):
+    """Level up the player"""
+
+    x = player_stats['level']
+
+    if player_stats['level'] > 15:
+        soul_amount = 0.02 * x ** 3 + 3.06 * x ** 2 + 105.6 * x - 895
     else:
-        print(f"{player_name} left the bonfire")
+        soul_amount = x * 75
+
+    level_up_choice = input(f"Choose a stat to increase:\n"
+                     f"Souls needed: {abs(int(soul_amount))}\n"
+                     f"Current Souls: {player_stats['souls']}\n"
+                     f"(h) Health\n"
+                     f"(a) Attunement\n"
+                     f"(s) Strength\n"
+                     f"(d) Dexterity\n"
+                     f"(i) Intelligence\n"
+                     f"(f) Faith\n"
+                     f"(l) Luck\n")
+    if player_stats['souls'] < int(soul_amount):
+        print("Not enough souls to level up")
+    else:
+        if level_up_choice == "h":
+            player_stats['health'] += 1
+            player_stats['level'] += 1
+            player_stats['souls'] -= int(soul_amount)
+        elif level_up_choice == "a":
+            player_stats['attunement'] += 1
+            player_stats['level'] += 1
+            player_stats['souls'] -= int(soul_amount)
+        elif level_up_choice == "s":
+            player_stats['strength'] += 1
+            player_stats['level'] += 1
+            player_stats['souls'] -= int(soul_amount)
+        elif level_up_choice == "d":
+            player_stats['dexterity'] += 1
+            player_stats['level'] += 1
+            player_stats['souls'] -= int(soul_amount)
+        elif level_up_choice == "i":
+            player_stats['intelligence'] += 1
+            player_stats['level'] += 1
+            player_stats['souls'] -= int(soul_amount)
+        elif level_up_choice == "f":
+            player_stats['faith'] += 1
+            player_stats['level'] += 1
+            player_stats['souls'] -= int(soul_amount)
+        elif level_up_choice == "l":
+            player_stats['luck'] += 1
+            player_stats['level'] += 1
+            player_stats['souls'] -= int(soul_amount)
