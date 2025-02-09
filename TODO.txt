@@ -1,7 +1,5 @@
 TODO:
 - [enhance combat - being turnbased - stamina, mana, special attacks] 
-- [Incorporate estus flasks for healing] 
-- [Set up souls drop from enemies to use to level up] 
 - [Set up tier based enemies and bosses]
 - [invader list]
 - [dying brings you back to the last bonfire with full health and reduced souls]

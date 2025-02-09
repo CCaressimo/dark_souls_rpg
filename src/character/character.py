@@ -114,19 +114,3 @@ def get_player_stats(player_stats):
     """Returns the player's stats for the selected profession"""
     return player_stats.copy()
 
-def get_strongest_skill(skills):
-    """Excludes 'health' and find the strongest skill"""
-    ignore_health = {key: value for key, value in skills.items() if key not in(
-        'name', 
-        'health', 
-        'attunement', 
-        'estus', 
-        'souls', 
-        'rings', 
-        'spells', 
-        'equipment',
-        'description',
-        'luck'
-        )}
-    strong_skill = max(ignore_health, key=skills.get)
-    return strong_skill
