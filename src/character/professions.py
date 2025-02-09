@@ -1,4 +1,6 @@
-"""Professions for the game"""
+"""
+Professions for the game
+"""
 
 from .equipment import Equipment
 

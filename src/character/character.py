@@ -1,4 +1,6 @@
-"""Character information"""
+"""
+Character information
+"""
 
 from .professions import SELECT_PROFESSION
 

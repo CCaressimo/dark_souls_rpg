@@ -1,4 +1,6 @@
-"""Monsters for the game"""
+"""
+Monsters for the game
+"""
 
 MONSTER_LIST = [
     {

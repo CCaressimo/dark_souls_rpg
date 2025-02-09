@@ -1,4 +1,6 @@
-"""Actions for the game"""
+"""
+Actions for the game
+"""
 
 import random
 from ..entities.monsters import MONSTER_LIST
@@ -25,84 +27,94 @@ def generate_enemy_encounter():
         print(f"You have encountered a {enemy['name']}!\n")
     return enemy
 
-# print(f"\n{player_name} is attacking the {enemy['name']}!\n")
-# strong_skill = get_strongest_skill(skills)
-# player_damage = 0
-# enemy_attack = 0
-# if strong_skill == "strength":
-#     player_damage = int(skills[strong_skill] / 2)
-#     enemy_attack = int(enemy['attack'] / .5)
-# elif strong_skill == "dexterity":
-#     enemy_attack = int(enemy['attack'] / 1)
-#     # First attack
-#     first_damage = int(skills[strong_skill] / 4)
-#     first_roll = random.randint(1, 20)
-#     if first_roll >= 10:  # Hit threshold
-#         print(f"First strike hits! ({first_roll})")
-#         player_damage = first_damage
-#     else:
-#         print(f"First strike misses! ({first_roll})")
-#         player_damage = 0
-
-#     # Second attack
-#     second_damage = int(skills[strong_skill] / 3)  # Slightly weaker second hit
-#     second_roll = random.randint(1, 20)
-#     if second_roll >= 12:  # Slightly harder to hit with second strike
-#         print(f"Second strike hits! ({second_roll})")
-#         player_damage += second_damage
-#     else:
-#         print(f"Second strike misses! ({second_roll})")
-
-#     print(f"Total damage dealt: {player_damage}")
-# elif strong_skill == "intelligence":
-#     player_damage = int(skills[strong_skill] / 4)
-#     enemy_attack = int(enemy['attack'] / 1.5)
-# elif strong_skill == "faith":
-#     player_damage = int(skills[strong_skill] / 4)
-#     enemy_attack = int(enemy['attack'] / 1.5)
-# print(f"{player_name} rolled a: {player_roll} + {player_damage}")
-# player_attack = player_roll + player_damage
-
-# print(f"You attacked the {enemy['name']} with a {player_attack}!")
-
-# if player_roll == 20:
-#     print(f"{player_name} critically hits {enemy['name']} for {player_damage * 2} damage!")
-#     enemy["health"] -= player_damage * 2
-# elif player_attack < enemy_attack:
-#     print(f"Ouch you took damage from a {enemy['name']}!\n")
-#     temp_stats['health'] -= enemy['damage']
-#     print(f"{player_name} has {temp_stats['health']} health left!\n")
-
-#     print(f"{enemy['name']} has {enemy['health']} health left!\n")
-# else:
-#     print(f"{enemy['name']} took {player_damage} damage!")
-#     enemy["health"] -= player_damage
-#     print(f"{enemy['name']} has {enemy['health']} health left!\n")
-
 def strength_attack(player_name, player_stats, temp_stats, enemy):
     """Player strength attack"""
     player_roll, enemy_roll, skills = rolls(player_stats)
-    print(f"\n{player_name} is attacking the {enemy['name']}!\n")
-    player_damage = 0
-    enemy_attack = 0
-    player_damage = int(skills[strong_skill] / 2)
-    enemy_attack = int(enemy['attack'] / .5)
+    player_skill = int(skills['strength'] / 2)
+    player_damage = random.randint(round(player_skill / 2), player_skill)
+    enemy_attack = round(enemy['attack'] / 1.7)
+    player_attack = player_roll + player_skill
+    enemy_action = ['dodges', 'blocks', 'deflects']
+    enemy_block = enemy_roll + enemy_attack
+
+    print(f"\n{player_name} is charging a power attack!")
+    print(f"{player_name} rolls a: {player_roll} + {player_skill}")
+    print(f"{enemy['name']} rolls a: {enemy_roll} + {enemy_attack}\n")
+
+    if player_roll == 20 or enemy_roll == 1:
+        player_damage *= 3
+        enemy['health'] -= player_damage
+        print(f"{player_name} does a critical backstab on "
+              f"{enemy['name']} for {player_damage} damage!")
+        print(f"{enemy['name']} has {enemy['health']} health left!\n")
+
+    elif player_attack > enemy_block:
+        enemy['health'] -= player_damage
+        print(f"{player_name} crushes {enemy['name']} with a {player_damage}!")
+        print(f"{enemy['name']} has {enemy['health']} health left!\n")
+    elif player_roll == 1 or enemy_roll == 20:
+        temp_stats['health'] -= enemy['damage'] * 2
+        print(f"{enemy['name']} does a critical counter on "
+              f"{player_name} for {enemy['damage'] * 2} damage!")
+        print(f"{player_name} has {temp_stats['health']} health left!\n")
+    else:
+        print(f"{enemy['name']} " + random.choice(enemy_action) + f" {player_name}'s attack!\n")
 
 def dexterity_attack(player_name, player_stats, temp_stats, enemy):
     """Player dexterity attack"""
+    skills = get_player_stats(player_stats)
+    player_skill = int(skills['dexterity'] / 4)
+    player_combo = random.randint(1, player_skill)
+    enemy_attack = round(enemy['attack'] / 2)
+    enemy_action = ['dodges', 'blocks', 'deflects']
 
-def intelligence_attack(player_name, player_stats, temp_stats, enemy):
-    """Player intelligence attack"""
+    print(f"\n{player_name} is goes for a light combo attack!")
+    if player_combo > 1:
+        print(f"{player_name} is attacking with {player_combo} hits!")
+    else:
+        print(f"{player_name} is attacking with {player_combo} hit!")
 
-def faith_attack(player_name, player_stats, temp_stats, enemy):
-    """Player faith attack"""
+    for i in range(player_combo):
+        player_roll, enemy_roll, skills = rolls(player_stats)
+        player_damage = random.randint(1, player_skill)
+        player_attack = player_roll + player_skill
+        enemy_block = enemy_roll + enemy_attack
 
-def player_attacks(player_name, player_stats, temp_stats, enemy):
-    """Select player attack"""
-    strength_attack(player_name, player_stats, temp_stats, enemy)
-    dexterity_attack(player_name, player_stats, temp_stats, enemy)
-    intelligence_attack(player_name, player_stats, temp_stats, enemy)
-    faith_attack(player_name, player_stats, temp_stats, enemy)
+        print(f"{player_name} rolls a: {player_roll} + {player_skill}")
+        print(f"{enemy['name']} rolls a: {enemy_roll} + {enemy_attack}\n")
+        if player_roll == 20 or enemy_roll == 1:
+            player_damage *= 2
+            enemy['health'] -= player_damage 
+            print(f"{player_name} does a critical backstab on "
+                  f"{enemy['name']} for {player_damage} damage!")
+            print(f"{enemy['name']} has {enemy['health']} health left!\n")
+
+        elif player_attack > enemy_block:
+            enemy['health'] -= player_damage
+            print(f"{player_name} strikes {enemy['name']} with a {player_damage}!")
+            print(f"{enemy['name']} has {enemy['health']} health left!\n")
+        elif player_roll == 1 or enemy_roll == 20:
+            temp_stats['health'] -= enemy['damage'] * 2
+            print(f"{enemy['name']} does a critical counter on "
+                  f"{player_name} for {enemy['damage'] * 2} damage!")
+            print(f"{player_name} has {temp_stats['health']} health left!\n")
+        else:
+            print(f"{enemy['name']} " + random.choice(enemy_action) + f" {player_name}'s attack!\n")
+
+
+# def spell_attack(player_name, player_stats, temp_stats, enemy):
+#     """Player intelligence attack"""
+#     player_roll, enemy_roll, skills = rolls(player_stats)
+#     player_skill = int(skills['intelligence'] / 4)
+#     enemy_attack = round(enemy['attack'] / 2)
+#     enemy_action = ['dodges', 'blocks', 'deflects']
+
+
+# def enemy_attack(player_name, player_stats, temp_stats, enemy):
+#     """Enemy attack"""
+#     enemy_roll, enemy_attack, enemy_action = rolls(enemy)
+#     enemy_damage = random.randint(round(enemy['attack'] / 2), enemy['attack'])
+#     enemy_block = enemy_roll + enemy_attack
 
 def cast_heal(player_name, player_stats, temp_stats, enemy):
     """Player action to cast a healing spell"""

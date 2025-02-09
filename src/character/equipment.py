@@ -1,12 +1,15 @@
-"""Player equipment and inventory"""
-
+"""
+Player equipment and inventory
+"""
 
 class Equipment:
     """Defines player's equipment"""
     MAX_RINGS = 2
     MAX_SPELLS = 3
 
-    def __init__(self, weapon="None", armor="None", shield="None", rings=None, spells=None):
+    def __init__(self, weapon="None",
+                armor="None", shield="None",
+                rings=None, spells=None, **kwargs):
         self.weapon = weapon
         self.armor = armor
         self.shield = shield

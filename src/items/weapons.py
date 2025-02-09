@@ -1,3 +1,7 @@
+"""
+Define weapons and stats
+"""
+
 weapons = {
     "sword": {
         "name": "Sword",

@@ -1,4 +1,6 @@
-"""Bosses for the game"""
+"""
+Bosses for the game
+"""
 
 BOSS_LIST = [
     {

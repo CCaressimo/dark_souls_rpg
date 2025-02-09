@@ -1,18 +1,19 @@
-"""Combat module"""
+"""
+Combat scenarios
+"""
+
 from ..character.character import player_status
 from .actions import (
     rolls, cast_heal, drink_estus, generate_enemy_encounter,
-    player_death
+    player_death, strength_attack, dexterity_attack
 )
 
 def random_combat(player_name, player_stats, temp_stats):
     """Random combat encounter with a monster"""
 
     enemy = generate_enemy_encounter()
-
+    player_roll, enemy_roll, skills = rolls(player_stats)
     while True:
-
-        player_roll, enemy_roll, skills = rolls(player_stats)
 
         # Check enemy death
         if int(enemy['health']) <= 0:
@@ -33,8 +34,15 @@ def random_combat(player_name, player_stats, temp_stats):
                        "(4) Run\n")
 
         if action == "1":
-            # player_attacks(player_name, player_stats, temp_stats, enemy)
-            print("Attack")
+            print(f"{player_name} is attacking!")
+            attack = input("What do you want to do?\n"
+                        "(1) Strength Attack\n"
+                        "(2) Dexterity Attack\n")
+
+            if attack == "1":
+                strength_attack(player_name, player_stats, temp_stats, enemy)
+            elif attack == "2":
+                dexterity_attack(player_name, player_stats, temp_stats, enemy)
         elif action == "2":
             cast_heal(player_name, player_stats, temp_stats, enemy)
         elif action == "3":
