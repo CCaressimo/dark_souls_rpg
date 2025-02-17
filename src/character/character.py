@@ -111,8 +111,6 @@ def profession_list():
               f"{skill['estus']:<6}")
     print("-" * 65)
 
-
 def get_player_stats(player_stats):
     """Returns the player's stats for the selected profession"""
     return player_stats.copy()
-

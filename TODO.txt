@@ -1,6 +1,6 @@
 TODO:
-- [enhance combat - being turnbased - stamina, mana, special attacks]
-- [Set up multiple attack types and spells for both player and enemies]  
+- [enhance combat - special attacks]
+- [Set up and spells for both player]  
 - [Set up tier based enemies and bosses]
 - [invader list]
 - [health and damage scales]
